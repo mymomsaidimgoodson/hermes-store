@@ -1,0 +1,42 @@
+[
+  {
+    "id": "iphone-16-pro",
+    "brand": "Apple",
+    "name": "iPhone 16 Pro",
+    "price": "89 990 ₽",
+    "description": "Идеальное воплощение технологий в титановом корпусе. Сверхбыстрый чип, профессиональная система камер и невероятная автономность.",
+    "images": [
+      "https://picsum.photos/id/1015/1000/1000",
+      "https://picsum.photos/id/1016/500/500",
+      "https://picsum.photos/id/1025/500/500"
+    ],
+    "specs": {
+      "Процессор": "A18 Pro chip",
+      "Экран": "6.3\" Super Retina XDR",
+      "Память": "128 ГБ",
+      "Материал": "Titanium"
+    },
+    "avitoLink": "https://avito.ru",
+    "isNew": false
+  },
+  {
+    "id": "xiaomi-14t-pro",
+    "brand": "Xiaomi",
+    "name": "Xiaomi 14T Pro",
+    "price": "54 990 ₽",
+    "description": "Новый уровень мобильной фотографии вместе с Leica. Ультрабыстрая зарядка и флагманский дисплей в премиальном дизайне.",
+    "images": [
+      "https://picsum.photos/id/201/1000/1000",
+      "https://picsum.photos/id/202/500/500",
+      "https://picsum.photos/id/203/500/500"
+    ],
+    "specs": {
+      "Процессор": "MediaTek Dimensity 9300+",
+      "Экран": "6.67\" AMOLED 144Hz",
+      "Память": "12/512 ГБ",
+      "Камера": "Leica 50MP"
+    },
+    "avitoLink": "https://avito.ru",
+    "isNew": true
+  }
+]
