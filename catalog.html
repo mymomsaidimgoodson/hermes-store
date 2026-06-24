@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Каталог — Hermes Store</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+  
+  <!-- Шрифты как на главной -->
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500&display=swap');
+    
+    body { font-family: 'Inter', system-ui, sans-serif; }
+    h1, h2, h3, .category-title { font-family: 'Playfair Display', serif; }
+    
+    .catalog-bg {
+      background: linear-gradient(rgba(248, 246, 242, 0.88), rgba(248, 246, 242, 0.95)), 
+                  url('hero-bg.jpg') center/cover no-repeat;
+      background-attachment: fixed;
+    }
+  </style>
+</head>
+<body class="bg-[#F8F6F2] text-[#1C1C1C]">
+
+  <!-- HEADER - ТОЧНО КАК ТЫ ПРИСЛАЛ -->
+  <header class="fixed top-0 w-full bg-[#F8F6F2]/90 backdrop-blur-md z-50 border-b border-[#EDE9E0]">
+    <div class="max-w-7xl mx-auto px-6 py-5 flex justify-between items-center">
+      <div class="flex items-center gap-3">
+        <span class="text-3xl">🪽</span>
+        <h1 class="text-2xl tracking-widest font-light">HERMES STORE</h1>
+      </div>
+      <nav class="hidden md:flex gap-10 text-sm tracking-wider">
+        <a href="index.html" class="hover:text-[#D4B88A] transition">Главная</a>
+        <a href="catalog.html" class="hover:text-[#D4B88A] transition">Каталог</a>
+        <a href="#" class="hover:text-[#D4B88A] transition">Apple</a>
+        <a href="#" class="hover:text-[#D4B88A] transition">Xiaomi</a>
+        <a href="#" class="hover:text-[#D4B88A] transition">Аксессуары</a>
+      </nav>
+      <div class="flex items-center gap-6">
+        <i class="fa-solid fa-magnifying-glass text-xl cursor-pointer"></i>
+        <i class="fa-solid fa-heart text-xl cursor-pointer"></i>
+        <i class="fa-solid fa-bag-shopping text-xl cursor-pointer"></i>
+      </div>
+    </div>
+  </header>
+
+  <!-- ФОН КАК НА ГЛАВНОЙ -->
+  <div class="catalog-bg pt-32 pb-24 min-h-screen">
+    <div class="max-w-7xl mx-auto px-8">
+      <h1 class="text-6xl font-light text-center mb-3">Каталог</h1>
+      <p class="text-center text-gray-600 mb-20">Гермес принёс только лучшее</p>
+
+      <!-- Категории в стиле Hermes -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+        
+        <a href="#" class="category-card group">
+          <div class="aspect-square bg-white overflow-hidden">
+            <img src="https://picsum.photos/id/1015/800/800" class="w-full h-full object-cover group-hover:scale-105 transition duration-700">
+          </div>
+          <p class="category-title text-center mt-6 text-lg tracking-widest">СМАРТФОНЫ</p>
+        </a>
+
+        <a href="#" class="category-card group">
+          <div class="aspect-square bg-white overflow-hidden">
+            <img src="https://picsum.photos/id/201/800/800" class="w-full h-full object-cover group-hover:scale-105 transition duration-700">
+          </div>
+          <p class="category-title text-center mt-6 text-lg tracking-widest">APPLE</p>
+        </a>
+
+        <a href="#" class="category-card group">
+          <div class="aspect-square bg-white overflow-hidden">
+            <img src="https://picsum.photos/id/251/800/800" class="w-full h-full object-cover group-hover:scale-105 transition duration-700">
+          </div>
+          <p class="category-title text-center mt-6 text-lg tracking-widest">ЗАЩИТНЫЕ СТЁКЛА</p>
+        </a>
+
+        <a href="#" class="category-card group">
+          <div class="aspect-square bg-white overflow-hidden">
+            <img src="https://picsum.photos/id/180/800/800" class="w-full h-full object-cover group-hover:scale-105 transition duration-700">
+          </div>
+          <p class="category-title text-center mt-6 text-lg tracking-widest">ЧЕХЛЫ</p>
+        </a>
+
+        <a href="#" class="category-card group">
+          <div class="aspect-square bg-white overflow-hidden">
+            <img src="https://picsum.photos/id/133/800/800" class="w-full h-full object-cover group-hover:scale-105 transition duration-700">
+          </div>
+          <p class="category-title text-center mt-6 text-lg tracking-widest">POWER BANK</p>
+        </a>
+
+        <a href="#" class="category-card group">
+          <div class="aspect-square bg-white overflow-hidden">
+            <img src="https://picsum.photos/id/870/800/800" class="w-full h-full object-cover group-hover:scale-105 transition duration-700">
+          </div>
+          <p class="category-title text-center mt-6 text-lg tracking-widest">ЗАРЯДНЫЕ УСТРОЙСТВА</p>
+        </a>
+
+      </div>
+    </div>
+  </div>
+
+  <footer class="bg-[#1C1C1C] text-white py-20">
+    <div class="max-w-7xl mx-auto px-8 text-center">
+      <p class="text-[#D4B88A] text-2xl mb-4">HERMES STORE</p>
+      <p>Быстрый как Гермес. Надёжный как мрамор.</p>
+      <p class="mt-10 text-sm opacity-60">© 2026 Hermes Store. Все товары ведут на Авито.</p>
+    </div>
+  </footer>
+
+</body>
+</html>
