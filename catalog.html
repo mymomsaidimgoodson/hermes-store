@@ -12,7 +12,6 @@
     body { font-family: 'Inter', system-ui, sans-serif; }
     h1, h2 { font-family: 'Playfair Display', serif; }
     
-    /* Скрываем стандартный скроллбар для эстетики, но оставляем возможность скроллить */
     ::-webkit-scrollbar { width: 6px; }
     ::-webkit-scrollbar-track { background: #F8F6F2; }
     ::-webkit-scrollbar-thumb { background: #D4B88A; border-radius: 10px; }
@@ -22,6 +21,7 @@
 
   <header class="fixed top-0 w-full bg-[#F8F6F2]/90 backdrop-blur-md z-50 border-b border-[#EDE9E0]">
     <div class="max-w-7xl mx-auto px-6 py-5 flex justify-between items-center">
+      
       <div class="flex items-center gap-3">
         <svg class="w-8 h-8 text-[#D4B88A]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
           <path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"></path>
@@ -29,19 +29,34 @@
         </svg>
         <a href="index.html" class="text-2xl tracking-widest font-light" style="font-family: 'Playfair Display', serif;">HERMES STORE</a>
       </div>
+
       <nav class="hidden md:flex gap-10 text-sm tracking-wider">
-        <a href="catalog.html" class="text-[#D4B88A] transition border-b border-[#D4B88A] pb-1">Каталог</a>
-        <a href="#" class="hover:text-[#D4B88A] transition">Apple</a>
-        <a href="#" class="hover:text-[#D4B88A] transition">Xiaomi</a>
+        <a href="catalog.html" class="hover:text-[#D4B88A] transition">Каталог</a>
         <a href="#" class="hover:text-[#D4B88A] transition">Аксессуары</a>
+        <a href="#" class="hover:text-[#D4B88A] transition">Техника</a>
+        <a href="#" class="hover:text-[#D4B88A] transition">Контактные данные</a>
       </nav>
+
       <div class="flex items-center gap-6">
         <i class="fa-solid fa-magnifying-glass text-xl cursor-pointer hover:text-[#D4B88A] transition"></i>
         <i class="fa-solid fa-heart text-xl cursor-pointer hover:text-[#D4B88A] transition"></i>
-        <i class="fa-solid fa-bag-shopping text-xl cursor-pointer hover:text-[#D4B88A] transition"></i>
+        <button id="mobile-menu-btn" class="md:hidden text-2xl focus:outline-none hover:text-[#D4B88A] transition">
+          <i class="fa-solid fa-bars"></i>
+        </button>
       </div>
+
     </div>
   </header>
+
+  <div id="mobile-menu" class="fixed inset-0 bg-[#F8F6F2] z-[60] hidden flex-col items-center justify-center gap-10 text-2xl tracking-widest font-light transition-opacity duration-300">
+    <button id="mobile-menu-close" class="absolute top-6 right-6 text-4xl hover:text-[#D4B88A] transition">
+      <i class="fa-solid fa-xmark"></i>
+    </button>
+    <a href="catalog.html" class="hover:text-[#D4B88A] transition">Каталог</a>
+    <a href="#" class="hover:text-[#D4B88A] transition">Аксессуары</a>
+    <a href="#" class="hover:text-[#D4B88A] transition">Техника</a>
+    <a href="#" class="hover:text-[#D4B88A] transition">Контактные данные</a>
+  </div>
 
   <div class="max-w-7xl mx-auto px-6 pt-32 pb-8">
     <div class="flex items-center gap-2 text-sm text-gray-400 mb-6 tracking-wide">
@@ -80,70 +95,9 @@
     </aside>
 
     <div class="w-full lg:w-3/4">
-      <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
-        
-        <div class="group bg-white p-6 hover:shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:-translate-y-1 transition-all duration-500 flex flex-col">
-          <img src="https://picsum.photos/id/1015/800/800" alt="iPhone 16 Pro" class="w-full aspect-square object-contain mb-6">
-          <h3 class="font-medium text-xl">iPhone 16 Pro</h3>
-          <p class="text-gray-500 text-sm mb-4">128GB • Natural Titanium</p>
-          <div class="mt-auto flex justify-between items-end">
-            <p class="text-2xl">89 990 ₽</p>
-            <a href="#" class="px-5 py-2.5 border border-[#D4B88A] text-[#D4B88A] text-sm tracking-wider hover:bg-[#D4B88A] hover:text-white transition">
-              В КОРЗИНУ
-            </a>
-          </div>
+      
+      <div id="catalog-grid" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
         </div>
-
-        <div class="group bg-white p-6 hover:shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:-translate-y-1 transition-all duration-500 flex flex-col relative">
-          <span class="absolute top-6 left-6 text-xs tracking-widest text-[#D4B88A] font-medium border border-[#D4B88A] px-2 py-1">NEW</span>
-          <img src="https://picsum.photos/id/201/800/800" alt="Xiaomi 14T Pro" class="w-full aspect-square object-contain mb-6">
-          <h3 class="font-medium text-xl">Xiaomi 14T Pro</h3>
-          <p class="text-gray-500 text-sm mb-4">12/512GB • Midnight Black</p>
-          <div class="mt-auto flex justify-between items-end">
-            <p class="text-2xl">54 990 ₽</p>
-            <a href="#" class="px-5 py-2.5 border border-[#D4B88A] text-[#D4B88A] text-sm tracking-wider hover:bg-[#D4B88A] hover:text-white transition">
-              В КОРЗИНУ
-            </a>
-          </div>
-        </div>
-
-        <div class="group bg-white p-6 hover:shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:-translate-y-1 transition-all duration-500 flex flex-col">
-          <img src="https://picsum.photos/id/119/800/800" alt="MacBook Air M3" class="w-full aspect-square object-contain mb-6">
-          <h3 class="font-medium text-xl">MacBook Air M3</h3>
-          <p class="text-gray-500 text-sm mb-4">8-Core CPU • 10-Core GPU • 16GB</p>
-          <div class="mt-auto flex justify-between items-end">
-            <p class="text-2xl">124 990 ₽</p>
-            <a href="#" class="px-5 py-2.5 border border-[#D4B88A] text-[#D4B88A] text-sm tracking-wider hover:bg-[#D4B88A] hover:text-white transition">
-              В КОРЗИНУ
-            </a>
-          </div>
-        </div>
-
-        <div class="group bg-white p-6 hover:shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:-translate-y-1 transition-all duration-500 flex flex-col relative">
-          <img src="https://picsum.photos/id/175/800/800" alt="AirPods Pro 2" class="w-full aspect-square object-contain mb-6">
-          <h3 class="font-medium text-xl">AirPods Pro 2</h3>
-          <p class="text-gray-500 text-sm mb-4">Type-C (USB-C)</p>
-          <div class="mt-auto flex justify-between items-end">
-            <p class="text-2xl">23 490 ₽</p>
-            <a href="#" class="px-5 py-2.5 border border-[#D4B88A] text-[#D4B88A] text-sm tracking-wider hover:bg-[#D4B88A] hover:text-white transition">
-              В КОРЗИНУ
-            </a>
-          </div>
-        </div>
-
-        <div class="group bg-white p-6 hover:shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:-translate-y-1 transition-all duration-500 flex flex-col relative">
-          <img src="https://picsum.photos/id/365/800/800" alt="Dyson Supersonic" class="w-full aspect-square object-contain mb-6">
-          <h3 class="font-medium text-xl">Dyson Supersonic™</h3>
-          <p class="text-gray-500 text-sm mb-4">Nickel/Copper</p>
-          <div class="mt-auto flex justify-between items-end">
-            <p class="text-2xl">48 900 ₽</p>
-            <a href="#" class="px-5 py-2.5 border border-[#D4B88A] text-[#D4B88A] text-sm tracking-wider hover:bg-[#D4B88A] hover:text-white transition">
-              В КОРЗИНУ
-            </a>
-          </div>
-        </div>
-
-      </div>
 
       <div class="mt-16 flex justify-center">
         <button class="px-14 py-4 border border-[#D4B88A] text-[#1C1C1C] hover:bg-[#D4B88A] hover:text-white transition-all text-sm tracking-[2px] font-light uppercase">
@@ -162,5 +116,6 @@
     </div>
   </footer>
 
+  <script src="app.js"></script>
 </body>
 </html>

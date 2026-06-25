@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>iPhone 16 Pro — Hermes Store</title>
+  <title>Hermes Store</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
   <style>
@@ -16,7 +16,6 @@
     ::-webkit-scrollbar-track { background: #F8F6F2; }
     ::-webkit-scrollbar-thumb { background: #D4B88A; border-radius: 10px; }
 
-    /* Убираем стандартный маркер у details для кастомного аккордеона */
     details > summary { list-style: none; }
     details > summary::-webkit-details-marker { display: none; }
   </style>
@@ -25,25 +24,42 @@
 
   <header class="fixed top-0 w-full bg-[#F8F6F2]/90 backdrop-blur-md z-50 border-b border-[#EDE9E0]">
     <div class="max-w-7xl mx-auto px-6 py-5 flex justify-between items-center">
+      
       <div class="flex items-center gap-3">
         <svg class="w-8 h-8 text-[#D4B88A]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
           <path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"></path>
           <line x1="16" y1="8" x2="2" y2="22"></line>
         </svg>
-        <a href="index.html" class="text-2xl tracking-widest font-light playfair">HERMES STORE</a>
+        <a href="index.html" class="text-2xl tracking-widest font-light" style="font-family: 'Playfair Display', serif;">HERMES STORE</a>
       </div>
+
       <nav class="hidden md:flex gap-10 text-sm tracking-wider">
         <a href="catalog.html" class="hover:text-[#D4B88A] transition">Каталог</a>
-        <a href="#" class="hover:text-[#D4B88A] transition">Apple</a>
-        <a href="#" class="hover:text-[#D4B88A] transition">Xiaomi</a>
         <a href="#" class="hover:text-[#D4B88A] transition">Аксессуары</a>
+        <a href="#" class="hover:text-[#D4B88A] transition">Техника</a>
+        <a href="#" class="hover:text-[#D4B88A] transition">Контактные данные</a>
       </nav>
+
       <div class="flex items-center gap-6">
         <i class="fa-solid fa-magnifying-glass text-xl cursor-pointer hover:text-[#D4B88A] transition"></i>
         <i class="fa-solid fa-heart text-xl cursor-pointer hover:text-[#D4B88A] transition"></i>
+        <button id="mobile-menu-btn" class="md:hidden text-2xl focus:outline-none hover:text-[#D4B88A] transition">
+          <i class="fa-solid fa-bars"></i>
+        </button>
       </div>
+
     </div>
   </header>
+
+  <div id="mobile-menu" class="fixed inset-0 bg-[#F8F6F2] z-[60] hidden flex-col items-center justify-center gap-10 text-2xl tracking-widest font-light transition-opacity duration-300">
+    <button id="mobile-menu-close" class="absolute top-6 right-6 text-4xl hover:text-[#D4B88A] transition">
+      <i class="fa-solid fa-xmark"></i>
+    </button>
+    <a href="catalog.html" class="hover:text-[#D4B88A] transition">Каталог</a>
+    <a href="#" class="hover:text-[#D4B88A] transition">Аксессуары</a>
+    <a href="#" class="hover:text-[#D4B88A] transition">Техника</a>
+    <a href="#" class="hover:text-[#D4B88A] transition">Контактные данные</a>
+  </div>
 
   <div class="max-w-7xl mx-auto px-6 pt-32 pb-8">
     <div class="flex items-center gap-2 text-sm text-gray-400 tracking-wide">
@@ -51,76 +67,56 @@
       <span>/</span>
       <a href="catalog.html" class="hover:text-[#1C1C1C] transition">Каталог</a>
       <span>/</span>
-      <a href="#" class="hover:text-[#1C1C1C] transition">Apple</a>
+      <span id="breadcrumb-brand" class="hover:text-[#1C1C1C] transition cursor-pointer"></span>
       <span>/</span>
-      <span class="text-[#1C1C1C]">iPhone 16 Pro</span>
+      <span id="breadcrumb-name" class="text-[#1C1C1C]"></span>
     </div>
   </div>
 
-  <main class="max-w-7xl mx-auto px-6 pb-24 flex flex-col lg:flex-row gap-16">
+  <main id="product-container" class="max-w-7xl mx-auto px-6 pb-24 flex flex-col lg:flex-row gap-16 hidden">
     
     <div class="w-full lg:w-3/5">
       <div class="grid grid-cols-1 gap-4">
-        <div class="bg-white p-8 group flex items-center justify-center aspect-square">
-          <img src="https://picsum.photos/id/1015/1000/1000" alt="iPhone 16 Pro Main" class="w-full h-full object-contain mix-blend-multiply transition-transform duration-700 group-hover:scale-105">
+        <div class="bg-white p-8 group flex items-center justify-center aspect-square relative">
+            <div id="product-badge-container"></div>
+            <img id="main-image" src="" alt="Main Image" class="w-full h-full object-contain mix-blend-multiply transition-transform duration-700 group-hover:scale-105">
         </div>
-        <div class="grid grid-cols-2 gap-4">
-          <div class="bg-white p-4 aspect-square flex items-center justify-center cursor-pointer hover:opacity-80 transition">
-             <img src="https://picsum.photos/id/1016/500/500" alt="Detail 1" class="w-full h-full object-contain mix-blend-multiply">
+        <div id="thumbnails-container" class="grid grid-cols-2 gap-4">
           </div>
-          <div class="bg-white p-4 aspect-square flex items-center justify-center cursor-pointer hover:opacity-80 transition">
-             <img src="https://picsum.photos/id/1025/500/500" alt="Detail 2" class="w-full h-full object-contain mix-blend-multiply">
-          </div>
-        </div>
       </div>
     </div>
 
     <div class="w-full lg:w-2/5">
       <div class="sticky top-32">
-        <p class="text-[#D4B88A] tracking-[4px] text-sm mb-4 uppercase">Apple</p>
-        <h1 class="text-4xl lg:text-5xl font-light mb-4 playfair">iPhone 16 Pro</h1>
-        <p class="text-2xl mb-8">89 990 ₽</p>
+        <p id="product-brand" class="text-[#D4B88A] tracking-[4px] text-sm mb-4 uppercase"></p>
+        <h1 id="product-name" class="text-4xl lg:text-5xl font-light mb-4 playfair"></h1>
+        <p id="product-price" class="text-2xl mb-8"></p>
 
-        <p class="text-gray-500 font-light leading-relaxed mb-10">
-          Идеальное воплощение технологий в титановом корпусе. Сверхбыстрый чип, профессиональная система камер и невероятная автономность.
-        </p>
+        <p id="product-description" class="text-gray-500 font-light leading-relaxed mb-10"></p>
 
-        <div class="mb-10">
-          <h3 class="text-sm tracking-wider mb-4 font-medium text-gray-400 uppercase">Цвет: Natural Titanium</h3>
-          <div class="flex gap-3">
-            <button class="w-10 h-10 rounded-full bg-[#B8B4AA] ring-2 ring-offset-2 ring-[#1C1C1C] transition"></button>
-            <button class="w-10 h-10 rounded-full bg-[#3B3B3B] ring-2 ring-offset-2 ring-transparent hover:ring-gray-300 transition"></button>
-            <button class="w-10 h-10 rounded-full bg-[#F2F1ED] border border-gray-300 ring-2 ring-offset-2 ring-transparent hover:ring-gray-300 transition"></button>
-          </div>
-        </div>
-
-        <a href="https://avito.ru" target="_blank" 
+        <a id="avito-btn" href="#" target="_blank" 
            class="block w-full text-center px-14 py-4 bg-[#1C1C1C] text-white hover:bg-[#D4B88A] transition-all text-sm tracking-[2px] font-light uppercase mb-12">
           Купить на Авито
         </a>
 
         <div class="border-t border-[#EDE9E0]">
           
-          <details class="group border-b border-[#EDE9E0] py-5 cursor-pointer">
+          <details class="group border-b border-[#EDE9E0] py-5 cursor-pointer" open>
             <summary class="flex justify-between items-center font-medium text-lg playfair">
               Характеристики
               <i class="fa-solid fa-chevron-down text-sm transition-transform duration-300 group-open:rotate-180 text-[#D4B88A]"></i>
             </summary>
-            <div class="pt-5 pb-2 text-gray-500 font-light text-sm space-y-3">
-              <div class="flex justify-between"><span class="text-gray-400">Процессор</span><span class="text-[#1C1C1C]">A18 Pro chip</span></div>
-              <div class="flex justify-between"><span class="text-gray-400">Экран</span><span class="text-[#1C1C1C]">6.3" Super Retina XDR</span></div>
-              <div class="flex justify-between"><span class="text-gray-400">Память</span><span class="text-[#1C1C1C]">128 ГБ</span></div>
-              <div class="flex justify-between"><span class="text-gray-400">Материал</span><span class="text-[#1C1C1C]">Titanium</span></div>
-            </div>
+            <div id="specs-container" class="pt-5 pb-2 text-gray-500 font-light text-sm space-y-3">
+              </div>
           </details>
 
           <details class="group border-b border-[#EDE9E0] py-5 cursor-pointer">
             <summary class="flex justify-between items-center font-medium text-lg playfair">
-              Гарантия и надежность
+              Гарантия и доставка
               <i class="fa-solid fa-chevron-down text-sm transition-transform duration-300 group-open:rotate-180 text-[#D4B88A]"></i>
             </summary>
             <div class="pt-5 pb-2 text-gray-500 font-light text-sm leading-relaxed">
-              Все устройства проходят строгую проверку. Мы предоставляем гарантию на выявление заводского брака и полную прозрачность при покупке через платформу Авито.
+              Все покупки осуществляются через безопасную сделку на платформе Авито. Доставка доступна по всей России.
             </div>
           </details>
 
@@ -128,6 +124,12 @@
       </div>
     </div>
   </main>
+  
+  <div id="error-message" class="max-w-7xl mx-auto px-6 py-24 text-center hidden">
+      <h2 class="text-3xl font-light mb-4 playfair">Товар не найден</h2>
+      <p class="text-gray-500 mb-8">Возможно, ссылка устарела или товар был удален.</p>
+      <a href="catalog.html" class="px-10 py-3 border border-[#D4B88A] text-[#1C1C1C] hover:bg-[#D4B88A] hover:text-white transition-all tracking-wider font-light uppercase">В каталог</a>
+  </div>
 
   <footer class="bg-[#1C1C1C] text-white py-16 mt-20">
     <div class="max-w-7xl mx-auto px-6 text-center">
@@ -137,5 +139,6 @@
     </div>
   </footer>
 
+  <script src="app.js"></script>
 </body>
 </html>
