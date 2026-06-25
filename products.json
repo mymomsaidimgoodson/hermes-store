@@ -78,5 +78,126 @@
     "avitoLink": "https://avito.ru",
     "isNew": false,
     "isBestseller": true
+  },
+  {
+    "id": "iphone-16-pro",
+    "brand": "Apple",
+    "name": "iPhone 16 Pro",
+    "price": "89 990 ₽",
+    "description": "Идеальное воплощение технологий в титановом корпусе. Сверхбыстрый чип, профессиональная система камер и невероятная автономность.",
+    "images": [
+      "https://picsum.photos/id/1015/1000/1000",
+      "https://picsum.photos/id/1016/500/500",
+      "https://picsum.photos/id/1025/500/500"
+    ],
+    "specs": {
+      "Память": "128GB • Titanium",
+      "Процессор": "A18 Pro chip",
+      "Экран": "6.3\" Super Retina XDR"
+    },
+    "avitoLink": "https://avito.ru",
+    "isNew": false,
+    "isBestseller": true
+  },
+  {
+    "id": "iphone-16-pro",
+    "brand": "Apple",
+    "name": "iPhone 16 Pro",
+    "price": "89 990 ₽",
+    "description": "Идеальное воплощение технологий в титановом корпусе. Сверхбыстрый чип, профессиональная система камер и невероятная автономность.",
+    "images": [
+      "https://picsum.photos/id/1015/1000/1000",
+      "https://picsum.photos/id/1016/500/500",
+      "https://picsum.photos/id/1025/500/500"
+    ],
+    "specs": {
+      "Память": "128GB • Titanium",
+      "Процессор": "A18 Pro chip",
+      "Экран": "6.3\" Super Retina XDR"
+    },
+    "avitoLink": "https://avito.ru",
+    "isNew": false,
+    "isBestseller": true
+  },
+  {
+    "id": "iphone-16-pro",
+    "brand": "Apple",
+    "name": "iPhone 16 Pro",
+    "price": "89 990 ₽",
+    "description": "Идеальное воплощение технологий в титановом корпусе. Сверхбыстрый чип, профессиональная система камер и невероятная автономность.",
+    "images": [
+      "https://picsum.photos/id/1015/1000/1000",
+      "https://picsum.photos/id/1016/500/500",
+      "https://picsum.photos/id/1025/500/500"
+    ],
+    "specs": {
+      "Память": "128GB • Titanium",
+      "Процессор": "A18 Pro chip",
+      "Экран": "6.3\" Super Retina XDR"
+    },
+    "avitoLink": "https://avito.ru",
+    "isNew": false,
+    "isBestseller": true
+  },
+  {
+    "id": "iphone-16-pro",
+    "brand": "Apple",
+    "name": "iPhone 16 Pro",
+    "price": "89 990 ₽",
+    "description": "Идеальное воплощение технологий в титановом корпусе. Сверхбыстрый чип, профессиональная система камер и невероятная автономность.",
+    "images": [
+      "https://picsum.photos/id/1015/1000/1000",
+      "https://picsum.photos/id/1016/500/500",
+      "https://picsum.photos/id/1025/500/500"
+    ],
+    "specs": {
+      "Память": "128GB • Titanium",
+      "Процессор": "A18 Pro chip",
+      "Экран": "6.3\" Super Retina XDR"
+    },
+    "avitoLink": "https://avito.ru",
+    "isNew": false,
+    "isBestseller": true
+  },
+  {
+    "id": "iphone-16-pro",
+    "brand": "Apple",
+    "name": "iPhone 16 Pro",
+    "price": "89 990 ₽",
+    "description": "Идеальное воплощение технологий в титановом корпусе. Сверхбыстрый чип, профессиональная система камер и невероятная автономность.",
+    "images": [
+      "https://picsum.photos/id/1015/1000/1000",
+      "https://picsum.photos/id/1016/500/500",
+      "https://picsum.photos/id/1025/500/500"
+    ],
+    "specs": {
+      "Память": "128GB • Titanium",
+      "Процессор": "A18 Pro chip",
+      "Экран": "6.3\" Super Retina XDR"
+    },
+    "avitoLink": "https://avito.ru",
+    "isNew": false,
+    "isBestseller": true
+  },
+  {
+    "id": "iphone-16-pro",
+    "brand": "Apple",
+    "name": "iPhone 16 Pro",
+    "price": "89 990 ₽",
+    "description": "Идеальное воплощение технологий в титановом корпусе. Сверхбыстрый чип, профессиональная система камер и невероятная автономность.",
+    "images": [
+      "https://picsum.photos/id/1015/1000/1000",
+      "https://picsum.photos/id/1016/500/500",
+      "https://picsum.photos/id/1025/500/500"
+    ],
+    "specs": {
+      "Память": "128GB • Titanium",
+      "Процессор": "A18 Pro chip",
+      "Экран": "6.3\" Super Retina XDR"
+    },
+    "avitoLink": "https://avito.ru",
+    "isNew": false,
+    "isBestseller": true
   }
+  
 ]

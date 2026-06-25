@@ -97,7 +97,18 @@
       <p class="mt-10 text-sm opacity-60">© 2026 Hermes Store. Все товары ведут на Авито.</p>
     </div>
   </footer>
-
+<div id="search-modal" class="fixed inset-0 bg-[#F8F6F2]/95 backdrop-blur-md z-[70] hidden flex-col items-center pt-32 px-6 transition-opacity duration-300 overflow-y-auto">
+    <button id="search-close" class="absolute top-6 right-6 text-4xl hover:text-[#D4B88A] transition">
+      <i class="fa-solid fa-xmark"></i>
+    </button>
+    
+    <div class="w-full max-w-3xl relative">
+      <input type="text" id="search-input" placeholder="Поиск товаров..." class="w-full bg-transparent border-b border-[#1C1C1C] text-3xl md:text-5xl font-light py-4 focus:outline-none focus:border-[#D4B88A] transition-colors placeholder-gray-300" autocomplete="off">
+    </div>
+    
+    <div id="search-results" class="w-full max-w-7xl mt-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 pb-24">
+      </div>
+  </div>
 <script src="app.js"></script>
 </body>
 </html>
