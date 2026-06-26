@@ -1,19 +1,62 @@
 [
   {
-    "id": "iphone-16-pro",
-    "brand": "Apple",
-    "name": "iPhone 16 Pro",
-    "price": "89 990 ₽",
-    "description": "Идеальное воплощение технологий в титановом корпусе. Сверхбыстрый чип, профессиональная система камер и невероятная автономность.",
+    "id": "leather-case-iphone-15-pro",
+    "category": "cases",
+    "subcategory": "iphone-15-pro",
+    "brand": "Hermes Concept",
+    "name": "Кожаный чехол для iPhone 15 Pro",
+    "price": "4 990 ₽",
+    "description": "Премиальная эко-кожа. Идеальное прилегание и защита от падений. Поддержка MagSafe.",
     "images": [
-      "https://picsum.photos/id/1015/1000/1000",
-      "https://picsum.photos/id/1016/500/500",
-      "https://picsum.photos/id/1025/500/500"
+      "https://picsum.photos/id/445/1000/1000",
+      "https://picsum.photos/id/445/500/500"
     ],
     "specs": {
-      "Память": "128GB • Titanium",
-      "Процессор": "A18 Pro chip",
-      "Экран": "6.3\" Super Retina XDR"
+      "Материал": "Эко-кожа",
+      "Совместимость": "iPhone 15 Pro",
+      "Особенности": "Поддержка MagSafe"
+    },
+    "avitoLink": "https://avito.ru",
+    "isNew": true,
+    "isBestseller": true
+  },
+  {
+    "id": "glass-privacy-iphone-15-pro",
+    "category": "glasses",
+    "subcategory": "iphone-15-pro",
+    "brand": "Shield",
+    "name": "Защитное стекло Privacy",
+    "price": "1 490 ₽",
+    "description": "Закаленное стекло с приватным фильтром (Антишпион). Надежно защищает экран от царапин и любопытных глаз.",
+    "images": [
+      "https://picsum.photos/id/60/1000/1000",
+      "https://picsum.photos/id/60/500/500"
+    ],
+    "specs": {
+      "Тип": "Антишпион",
+      "Твердость": "9H",
+      "Покрытие": "Олеофобное"
+    },
+    "avitoLink": "https://avito.ru",
+    "isNew": false,
+    "isBestseller": true
+  },
+  {
+    "id": "wireless-charger-stand",
+    "category": "gadgets",
+    "subcategory": "charging-station",
+    "brand": "Volt",
+    "name": "Магнитная зарядная станция 3 в 1",
+    "price": "5 990 ₽",
+    "description": "Минималистичная док-станция из авиационного алюминия для одновременной зарядки iPhone, Apple Watch и AirPods.",
+    "images": [
+      "https://picsum.photos/id/2/1000/1000",
+      "https://picsum.photos/id/3/500/500"
+    ],
+    "specs": {
+      "Мощность": "15 Вт",
+      "Разъем": "USB-C",
+      "Материал": "Алюминий"
     },
     "avitoLink": "https://avito.ru",
     "isNew": false,
@@ -21,183 +64,23 @@
   },
   {
     "id": "xiaomi-14t-pro",
+    "category": "tech",
+    "subcategory": "smartphones",
     "brand": "Xiaomi",
     "name": "Xiaomi 14T Pro",
     "price": "54 990 ₽",
-    "description": "Новый уровень мобильной фотографии вместе с Leica. Ультрабыстрая зарядка и флагманский дисплей в премиальном дизайне.",
+    "description": "Новый уровень мобильной фотографии вместе с Leica. Ультрабыстрая зарядка и флагманский дисплей в премиальном дизайн.",
     "images": [
       "https://picsum.photos/id/201/1000/1000",
-      "https://picsum.photos/id/202/500/500",
-      "https://picsum.photos/id/203/500/500"
+      "https://picsum.photos/id/202/500/500"
     ],
     "specs": {
       "Память": "12/512GB",
-      "Процессор": "MediaTek Dimensity 9300+",
-      "Экран": "6.67\" AMOLED 144Hz"
-    },
-    "avitoLink": "https://avito.ru",
-    "isNew": true,
-    "isBestseller": true
-  },
-  {
-    "id": "airpods-pro-2",
-    "brand": "Apple",
-    "name": "AirPods Pro 2",
-    "price": "23 490 ₽",
-    "description": "Магия звука в каждой детали. Активное шумоподавление нового уровня, адаптивный звук и кейс с разъемом USB-C.",
-    "images": [
-      "https://picsum.photos/id/175/1000/1000",
-      "https://picsum.photos/id/176/500/500",
-      "https://picsum.photos/id/177/500/500"
-    ],
-    "specs": {
-      "Тип": "TWS Наушники",
-      "Шумоподавление": "Активное (ANC)",
-      "Автономность": "До 30 часов"
-    },
-    "avitoLink": "https://avito.ru",
-    "isNew": false,
-    "isBestseller": true
-  },
-  {
-    "id": "xiaomi-desk-lamp-1s",
-    "brand": "Xiaomi",
-    "name": "Mi Smart LED Desk Lamp 1S",
-    "price": "3 990 ₽",
-    "description": "Идеальный свет для идеального рабочего места. Минималистичный дизайн, поддержка Apple HomeKit и 4 режима освещения.",
-    "images": [
-      "https://picsum.photos/id/366/1000/1000",
-      "https://picsum.photos/id/367/500/500",
-      "https://picsum.photos/id/368/500/500"
-    ],
-    "specs": {
-      "Тип": "Умная лампа",
-      "Световой поток": "520 лм",
-      "Управление": "Wi-Fi, Алиса, Siri"
-    },
-    "avitoLink": "https://avito.ru",
-    "isNew": false,
-    "isBestseller": true
-  },
-  {
-    "id": "iphone-16-pro",
-    "brand": "Apple",
-    "name": "iPhone 16 Pro",
-    "price": "89 990 ₽",
-    "description": "Идеальное воплощение технологий в титановом корпусе. Сверхбыстрый чип, профессиональная система камер и невероятная автономность.",
-    "images": [
-      "https://picsum.photos/id/1015/1000/1000",
-      "https://picsum.photos/id/1016/500/500",
-      "https://picsum.photos/id/1025/500/500"
-    ],
-    "specs": {
-      "Память": "128GB • Titanium",
-      "Процессор": "A18 Pro chip",
-      "Экран": "6.3\" Super Retina XDR"
-    },
-    "avitoLink": "https://avito.ru",
-    "isNew": false,
-    "isBestseller": true
-  },
-  {
-    "id": "iphone-16-pro",
-    "brand": "Apple",
-    "name": "iPhone 16 Pro",
-    "price": "89 990 ₽",
-    "description": "Идеальное воплощение технологий в титановом корпусе. Сверхбыстрый чип, профессиональная система камер и невероятная автономность.",
-    "images": [
-      "https://picsum.photos/id/1015/1000/1000",
-      "https://picsum.photos/id/1016/500/500",
-      "https://picsum.photos/id/1025/500/500"
-    ],
-    "specs": {
-      "Память": "128GB • Titanium",
-      "Процессор": "A18 Pro chip",
-      "Экран": "6.3\" Super Retina XDR"
-    },
-    "avitoLink": "https://avito.ru",
-    "isNew": false,
-    "isBestseller": true
-  },
-  {
-    "id": "iphone-16-pro",
-    "brand": "Apple",
-    "name": "iPhone 16 Pro",
-    "price": "89 990 ₽",
-    "description": "Идеальное воплощение технологий в титановом корпусе. Сверхбыстрый чип, профессиональная система камер и невероятная автономность.",
-    "images": [
-      "https://picsum.photos/id/1015/1000/1000",
-      "https://picsum.photos/id/1016/500/500",
-      "https://picsum.photos/id/1025/500/500"
-    ],
-    "specs": {
-      "Память": "128GB • Titanium",
-      "Процессор": "A18 Pro chip",
-      "Экран": "6.3\" Super Retina XDR"
-    },
-    "avitoLink": "https://avito.ru",
-    "isNew": false,
-    "isBestseller": true
-  },
-  {
-    "id": "iphone-16-pro",
-    "brand": "Apple",
-    "name": "iPhone 16 Pro",
-    "price": "89 990 ₽",
-    "description": "Идеальное воплощение технологий в титановом корпусе. Сверхбыстрый чип, профессиональная система камер и невероятная автономность.",
-    "images": [
-      "https://picsum.photos/id/1015/1000/1000",
-      "https://picsum.photos/id/1016/500/500",
-      "https://picsum.photos/id/1025/500/500"
-    ],
-    "specs": {
-      "Память": "128GB • Titanium",
-      "Процессор": "A18 Pro chip",
-      "Экран": "6.3\" Super Retina XDR"
-    },
-    "avitoLink": "https://avito.ru",
-    "isNew": false,
-    "isBestseller": true
-  },
-  {
-    "id": "iphone-16-pro",
-    "brand": "Apple",
-    "name": "iPhone 16 Pro",
-    "price": "89 990 ₽",
-    "description": "Идеальное воплощение технологий в титановом корпусе. Сверхбыстрый чип, профессиональная система камер и невероятная автономность.",
-    "images": [
-      "https://picsum.photos/id/1015/1000/1000",
-      "https://picsum.photos/id/1016/500/500",
-      "https://picsum.photos/id/1025/500/500"
-    ],
-    "specs": {
-      "Память": "128GB • Titanium",
-      "Процессор": "A18 Pro chip",
-      "Экран": "6.3\" Super Retina XDR"
-    },
-    "avitoLink": "https://avito.ru",
-    "isNew": false,
-    "isBestseller": true
-  },
-  {
-    "id": "iphone-16-pro",
-    "brand": "Apple",
-    "name": "iPhone 16 Pro",
-    "price": "89 990 ₽",
-    "description": "Идеальное воплощение технологий в титановом корпусе. Сверхбыстрый чип, профессиональная система камер и невероятная автономность.",
-    "images": [
-      "https://picsum.photos/id/1015/1000/1000",
-      "https://picsum.photos/id/1016/500/500",
-      "https://picsum.photos/id/1025/500/500"
-    ],
-    "specs": {
-      "Память": "128GB • Titanium",
-      "Процессор": "A18 Pro chip",
-      "Экран": "6.3\" Super Retina XDR"
+      "Процессор": "MediaTek 9300+",
+      "Экран": "AMOLED 144Hz"
     },
     "avitoLink": "https://avito.ru",
     "isNew": false,
     "isBestseller": true
   }
-  
 ]

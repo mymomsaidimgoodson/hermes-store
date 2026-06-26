@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Страница не найдена — Hermes Store</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500&display=swap');
+    body { font-family: 'Inter', system-ui, sans-serif; }
+    h1, h2, .playfair { font-family: 'Playfair Display', serif; }
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #F8F6F2; }
+    ::-webkit-scrollbar-thumb { background: #D4B88A; border-radius: 10px; }
+  </style>
+</head>
+<body class="bg-[#F8F6F2] text-[#1C1C1C] flex flex-col min-h-screen">
+
+  <header class="fixed top-0 w-full bg-[#F8F6F2]/90 backdrop-blur-md z-50 border-b border-[#EDE9E0]">
+    <div class="max-w-7xl mx-auto px-6 py-5 flex justify-between items-center">
+      <div class="flex items-center gap-3">
+        <svg class="w-8 h-8 text-[#D4B88A]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"></path>
+          <line x1="16" y1="8" x2="2" y2="22"></line>
+        </svg>
+        <a href="index.html" class="text-2xl tracking-widest font-light playfair">HERMES STORE</a>
+      </div>
+
+      <nav class="hidden md:flex gap-10 text-sm tracking-wider">
+        <a href="catalog.html" class="hover:text-[#D4B88A] transition">Каталог</a>
+        <a href="#" class="hover:text-[#D4B88A] transition">Аксессуары</a>
+        <a href="#" class="hover:text-[#D4B88A] transition">Техника</a>
+        <a href="#" class="hover:text-[#D4B88A] transition">Контактные данные</a>
+      </nav>
+
+      <div class="flex items-center gap-6">
+        <i class="fa-solid fa-magnifying-glass text-xl cursor-pointer hover:text-[#D4B88A] transition"></i>
+        <i class="fa-solid fa-heart text-xl cursor-pointer hover:text-[#D4B88A] transition"></i>
+        <button id="mobile-menu-btn" class="md:hidden text-2xl focus:outline-none hover:text-[#D4B88A] transition">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div id="mobile-menu" class="fixed inset-0 bg-[#F8F6F2] z-[60] hidden flex-col items-center justify-center gap-10 text-2xl tracking-widest font-light transition-opacity duration-300">
+    <button id="mobile-menu-close" class="absolute top-6 right-6 text-4xl hover:text-[#D4B88A] transition">
+      <i class="fa-solid fa-xmark"></i>
+    </button>
+    <a href="catalog.html" class="hover:text-[#D4B88A] transition">Каталог</a>
+    <a href="#" class="hover:text-[#D4B88A] transition">Аксессуары</a>
+    <a href="#" class="hover:text-[#D4B88A] transition">Техника</a>
+    <a href="#" class="hover:text-[#D4B88A] transition">Контактные данные</a>
+  </div>
+
+  <main class="flex-grow flex flex-col items-center justify-center text-center px-6 mt-32">
+    <h1 class="text-9xl font-light text-[#D4B88A] mb-8 playfair">404</h1>
+    <h2 class="text-3xl font-light mb-4 playfair">Страница не найдена</h2>
+    <p class="text-gray-500 font-light mb-10 max-w-md mx-auto">
+      Возможно, ссылка устарела, или товар был снят с производства. Но в нашем каталоге еще много интересного.
+    </p>
+    <a href="catalog.html" class="px-14 py-4 border border-[#1C1C1C] text-[#1C1C1C] hover:bg-[#1C1C1C] hover:text-white transition-all text-sm tracking-[2px] font-light uppercase">
+      Вернуться в каталог
+    </a>
+  </main>
+
+  <div id="search-modal" class="fixed inset-0 bg-[#F8F6F2]/95 backdrop-blur-md z-[70] hidden flex-col items-center pt-32 px-6 transition-opacity duration-300 overflow-y-auto">
+    <button id="search-close" class="absolute top-6 right-6 text-4xl hover:text-[#D4B88A] transition">
+      <i class="fa-solid fa-xmark"></i>
+    </button>
+    <div class="w-full max-w-3xl relative">
+      <input type="text" id="search-input" placeholder="Поиск товаров..." class="w-full bg-transparent border-b border-[#1C1C1C] text-3xl md:text-5xl font-light py-4 focus:outline-none focus:border-[#D4B88A] transition-colors placeholder-gray-300" autocomplete="off">
+    </div>
+    <div id="search-results" class="w-full max-w-7xl mt-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 pb-24"></div>
+  </div>
+
+  <footer class="bg-[#1C1C1C] text-white py-16 mt-20">
+    <div class="max-w-7xl mx-auto px-6 text-center">
+      <p class="text-[#D4B88A] text-2xl mb-4 playfair">HERMES STORE</p>
+      <p class="font-light">Быстрый как Гермес. Надёжный как мрамор.</p>
+      <p class="mt-10 text-sm opacity-60 font-light">© 2026 Hermes Store. Все товары ведут на Авито.</p>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
