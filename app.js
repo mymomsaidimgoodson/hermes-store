@@ -5,6 +5,9 @@ let activeCategory = 'all';
 let activeBrand = 'all'; 
 let activeSubcategory = 'all'; 
 
+// Загружаем Избранное из памяти браузера (или создаем пустой массив, если там ничего нет)
+let wishlist = JSON.parse(localStorage.getItem('hermes_wishlist')) || [];
+
 // Анимации
 const scrollObserver = new IntersectionObserver((entries, observer) => {
     entries.forEach(entry => {
@@ -38,6 +41,15 @@ document.addEventListener('DOMContentLoaded', () => {
             document.body.style.overflow = '';
         });
     }
+
+    // Слушатель кликов для кнопок Избранного (Делегирование событий)
+    document.addEventListener('click', (e) => {
+        const btn = e.target.closest('.wishlist-btn');
+        if (btn) {
+            e.preventDefault(); // Предотвращаем переход по ссылке карточки
+            toggleWishlist(btn);
+        }
+    });
 });
 
 async function loadData() {
@@ -60,9 +72,13 @@ async function loadData() {
             renderProductPage(allProducts);
         }
         
-        const bestsellersGrid = document.getElementById('bestsellers-grid');
-        if (bestsellersGrid) {
-            renderBestsellers(allProducts, bestsellersGrid);
+        if (document.getElementById('bestsellers-grid')) {
+            renderBestsellers(allProducts, document.getElementById('bestsellers-grid'));
+        }
+
+        // Инициализируем Избранное, если мы на странице wishlist.html
+        if (document.getElementById('wishlist-grid')) {
+            renderWishlist();
         }
         
         initSearch();
@@ -71,6 +87,62 @@ async function loadData() {
     }
 }
 
+// --- ЛОГИКА ИЗБРАННОГО ---
+function toggleWishlist(btn) {
+    const id = btn.dataset.id;
+    const icon = btn.querySelector('i');
+
+    if (wishlist.includes(id)) {
+        // Удаляем из Избранного
+        wishlist = wishlist.filter(itemId => itemId !== id);
+        icon.classList.remove('fa-solid', 'text-[#D4B88A]');
+        icon.classList.add('fa-regular', 'text-gray-400');
+    } else {
+        // Добавляем в Избранное
+        wishlist.push(id);
+        icon.classList.remove('fa-regular', 'text-gray-400');
+        icon.classList.add('fa-solid', 'text-[#D4B88A]');
+    }
+
+    // Сохраняем обновленный список в память браузера
+    localStorage.setItem('hermes_wishlist', JSON.stringify(wishlist));
+
+    // Если мы прямо сейчас на странице Избранного — обновляем витрину
+    if (document.getElementById('wishlist-grid')) {
+        renderWishlist();
+    }
+}
+
+function renderWishlist() {
+    const container = document.getElementById('wishlist-grid');
+    const emptyState = document.getElementById('empty-wishlist');
+    if (!container || !emptyState) return;
+
+    container.innerHTML = '';
+    
+    // Оставляем только те товары, ID которых есть в нашем массиве wishlist
+    const likedProducts = allProducts.filter(p => wishlist.includes(p.id));
+
+    if (likedProducts.length === 0) {
+        container.classList.add('hidden');
+        emptyState.classList.remove('hidden');
+        emptyState.classList.add('flex');
+    } else {
+        container.classList.remove('hidden');
+        emptyState.classList.add('hidden');
+        emptyState.classList.remove('flex');
+
+        likedProducts.forEach(product => {
+            const card = document.createElement('div');
+            card.className = 'group flex flex-col relative text-center h-full opacity-0 translate-y-8 transition-all duration-1000 ease-out';
+            card.innerHTML = createCardHtml(product);
+            container.appendChild(card);
+            scrollObserver.observe(card);
+        });
+    }
+}
+
+// Универсальный шаблон карточки с кнопкой лайка
 function createCardHtml(product) {
     const badgeHtml = product.isNew ? `<span class="absolute top-4 left-4 z-10 text-[10px] tracking-widest text-[#D4B88A] uppercase">New</span>` : '';
     const shortSpec = (product.specs && Object.keys(product.specs).length > 0) ? Object.values(product.specs)[0] : '';
@@ -79,8 +151,15 @@ function createCardHtml(product) {
 
     const hoverImageHtml = image1 ? `<img src="${image1}" alt="${product.name} detail" class="absolute inset-0 w-full h-full object-contain mix-blend-multiply opacity-0 transition-opacity duration-700 group-hover:opacity-100">` : '';
 
+    // Проверяем, есть ли этот товар в Избранном, чтобы закрасить сердечко
+    const isLiked = wishlist.includes(product.id);
+    const heartClass = isLiked ? 'fa-solid text-[#D4B88A]' : 'fa-regular text-gray-400 hover:text-[#D4B88A]';
+
     return `
         ${badgeHtml}
+        <button class="wishlist-btn absolute top-4 right-4 z-20 text-xl transition-colors" data-id="${product.id}">
+            <i class="${heartClass} fa-heart"></i>
+        </button>
         <a href="product.html?id=${product.id}" class="block relative w-full aspect-square mb-6 overflow-hidden bg-white/30 cursor-pointer shrink-0">
             <img src="${image0}" alt="${product.name}" class="absolute inset-0 w-full h-full object-contain mix-blend-multiply transition-opacity duration-700 ${image1 ? 'group-hover:opacity-0' : 'group-hover:scale-105'}">
             ${hoverImageHtml}
@@ -424,8 +503,9 @@ function initSearch() {
 
     if (!searchModal || !searchInput) return;
 
+    // ИСПРАВЛЕНИЕ: Теперь клик слушает саму иконку, а не весь родительский блок
     searchIcons.forEach(icon => {
-        icon.parentElement.addEventListener('click', (e) => {
+        icon.addEventListener('click', (e) => {
             e.preventDefault();
             searchModal.classList.remove('hidden');
             searchModal.classList.add('flex');
