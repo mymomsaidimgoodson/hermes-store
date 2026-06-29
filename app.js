@@ -557,3 +557,58 @@ function initSearch() {
         });
     });
 }
+// Обработка клика по категориям в шапке (с защитой от бесконечного цикла)
+document.addEventListener('click', (e) => {
+    // Используем closest, чтобы точно поймать клик, даже если нажали на текст внутри ссылки
+    const link = e.target.closest('.category-link');
+    
+    if (link) {
+        // ЗАЩИТА №1: Если это программный клик от нашего скрипта — игнорируем и рвем цикл!
+        if (!e.isTrusted) return;
+
+        // ЗАЩИТА №2: Если клиент уже в каталоге и кликает по левому сайдбару (<aside>), 
+        // страницу не перезагружаем (пусть работают локальные фильтры)
+        if (link.closest('aside')) return;
+
+        e.preventDefault(); 
+        const category = link.getAttribute('data-category');
+        
+        // Перенаправляем пользователя
+        window.location.href = `catalog.html?category=${category}`;
+    }
+});
+// Автоматическое применение фильтра из URL при открытии каталога
+window.addEventListener('DOMContentLoaded', () => {
+    if (document.getElementById('catalog-grid')) {
+        const urlParams = new URLSearchParams(window.location.search);
+        const categoryFromUrl = urlParams.get('category');
+        
+        if (categoryFromUrl) {
+            // Запускаем таймер, который проверяет каждые 100мс, загрузилась ли база
+            const waitForData = setInterval(() => {
+                const targetBtn = document.querySelector(`aside a[data-category="${categoryFromUrl}"]`);
+                const grid = document.getElementById('catalog-grid');
+                
+                // Если кнопка найдена и в сетке уже появились первые товары — база загружена!
+                if (targetBtn && grid && grid.children.length > 0) {
+                    clearInterval(waitForData); // Останавливаем таймер
+                    targetBtn.click(); // Теперь безопасно кликаем
+                }
+            }, 100);
+        }
+    }
+});
+// Логика плавного скрытия прелоадера
+window.addEventListener('load', () => {
+    const preloader = document.getElementById('preloader');
+    if (preloader) {
+        // Даем пользователю полсекунды насладиться логотипом, затем плавно скрываем
+        setTimeout(() => {
+            preloader.style.opacity = '0';
+            // Ждем завершения CSS-анимации (700мс) и полностью удаляем элемент из HTML
+            setTimeout(() => {
+                preloader.remove();
+            }, 700);
+        }, 500);
+    }
+});
