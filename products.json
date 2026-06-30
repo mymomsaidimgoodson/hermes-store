@@ -1,8 +1,8 @@
 [
   {
     "id": "leather-case-iphone-15-pro",
-    "category": "cases",
-    "subcategory": "iphone-15-pro",
+    "category": "Чехлы",
+    "subcategory": "iPhone 15 Pro",
     "brand": "Hermes Concept",
     "name": "Кожаный чехол для iPhone 15 Pro",
     "price": "4 990 ₽",
@@ -22,8 +22,8 @@
   },
   {
     "id": "glass-privacy-iphone-15-pro",
-    "category": "glasses",
-    "subcategory": "iphone-15-pro",
+    "category": "Cтекла",
+    "subcategory": "iPhone 15 Pro",
     "brand": "Shield",
     "name": "Защитное стекло Privacy",
     "price": "1 490 ₽",
@@ -43,8 +43,8 @@
   },
   {
     "id": "wireless-charger-stand",
-    "category": "gadgets",
-    "subcategory": "charging-station",
+    "category": "Гаджеты",
+    "subcategory": "Беспроводные зарядки",
     "brand": "Volt",
     "name": "Магнитная зарядная станция 3 в 1",
     "price": "5 990 ₽",
@@ -64,8 +64,8 @@
   },
   {
     "id": "xiaomi-14t-pro",
-    "category": "tech",
-    "subcategory": "smartphones",
+    "category": "Техника",
+    "subcategory": "Смартфоны",
     "brand": "Xiaomi",
     "name": "Xiaomi 14T Pro",
     "price": "54 990 ₽",

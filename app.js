@@ -1,9 +1,11 @@
 let allProducts = []; 
 let currentProducts = []; 
 let itemsToShow = 6; 
-let activeCategory = 'all'; 
-let activeBrand = 'all'; 
-let activeSubcategory = 'all'; 
+
+// --- НОВЫЕ ГЛОБАЛЬНЫЕ ПЕРЕМЕННЫЕ ДЛЯ УМНЫХ ФИЛЬТРОВ ---
+let currentCategory = null; 
+let currentSubcategory = null; 
+let currentFilters = {}; 
 
 // Загружаем Избранное из памяти браузера (или создаем пустой массив, если там ничего нет)
 let wishlist = JSON.parse(localStorage.getItem('hermes_wishlist')) || [];
@@ -62,10 +64,10 @@ async function loadData() {
         // Безопасная инициализация
         const catalogGrid = document.getElementById('catalog-grid');
         if (catalogGrid) {
-            renderCatalog(currentProducts, catalogGrid);
+            renderDynamicSidebar(); // Генерируем умный сайдбар
+            applySortAndRender(catalogGrid); // Отрисовываем товары с учетом сортировки
             initSort(); 
             initLoadMore(); 
-            initCategoryFilters(); 
         }
         
         if (document.getElementById('product-container')) {
@@ -87,6 +89,133 @@ async function loadData() {
     }
 }
 
+// --- УМНЫЙ ГЕНЕРАТОР САЙДБАРА ---
+function renderDynamicSidebar() {
+    const sidebar = document.getElementById('dynamic-sidebar');
+    if (!sidebar) return; 
+
+    let html = '';
+
+    // 1. Генерируем ГЛАВНЫЕ КАТЕГОРИИ
+    const categories = [...new Set(allProducts.map(p => p.category))].filter(Boolean);
+    
+    html += `<div class="mb-8">
+                <h3 class="text-xl mb-4 font-light tracking-wider" style="font-family: 'Playfair Display', serif;">КАТЕГОРИИ</h3>
+                <div class="flex flex-col gap-3">`;
+    categories.forEach(cat => {
+        const isActive = cat === currentCategory ? 'font-bold text-[#1C1C1C]' : 'text-gray-500';
+        html += `<button class="text-left hover:text-[#D4B88A] transition ${isActive}" onclick="setCategory('${cat}')">${cat}</button>`;
+    });
+    html += `</div></div>`;
+
+    // 2. Генерируем ПОДКАТЕГОРИИ (Только если выбрана главная категория)
+    if (currentCategory) {
+        const subcategories = [...new Set(allProducts.filter(p => p.category === currentCategory).map(p => p.subcategory))].filter(Boolean);
+        if (subcategories.length > 0) {
+            html += `<div class="mb-8">
+                        <h3 class="text-sm text-gray-400 tracking-widest uppercase mb-4">ТИП / МОДЕЛЬ</h3>
+                        <div class="flex flex-col gap-2">`;
+            subcategories.forEach(sub => {
+                const isActive = sub === currentSubcategory ? 'text-[#1C1C1C] font-medium' : 'text-gray-500';
+                html += `<button class="text-left hover:text-[#D4B88A] transition text-sm ${isActive}" onclick="setSubcategory('${sub}')">${sub}</button>`;
+            });
+            html += `</div></div>`;
+        }
+    }
+
+    // 3. Генерируем ЧЕКБОКСЫ ХАРАКТЕРИСТИК 
+    let availableProducts = allProducts;
+    if (currentCategory) availableProducts = availableProducts.filter(p => p.category === currentCategory);
+    if (currentSubcategory) availableProducts = availableProducts.filter(p => p.subcategory === currentSubcategory);
+
+    const availableFilters = {};
+    availableProducts.forEach(p => {
+        if (p.filters) {
+            for (const [key, value] of Object.entries(p.filters)) {
+                if (!availableFilters[key]) availableFilters[key] = new Set();
+                availableFilters[key].add(value);
+            }
+        }
+    });
+
+    for (const [filterName, valuesSet] of Object.entries(availableFilters)) {
+        html += `<div class="mb-6">
+                    <h4 class="text-sm font-medium mb-3">${filterName}</h4>
+                    <div class="flex flex-col gap-2">`;
+        [...valuesSet].sort().forEach(val => {
+            const isChecked = currentFilters[filterName] && currentFilters[filterName].includes(val);
+            html += `
+                <label class="flex items-center gap-3 cursor-pointer text-sm text-gray-600 hover:text-[#D4B88A] transition">
+                    <input type="checkbox" class="form-checkbox h-4 w-4 text-[#D4B88A] border-gray-300 rounded focus:ring-[#D4B88A]" 
+                           value="${val}" ${isChecked ? 'checked' : ''} onchange="toggleFilter('${filterName}', '${val}')">
+                    ${val}
+                </label>
+            `;
+        });
+        html += `</div></div>`;
+    }
+
+    sidebar.innerHTML = html;
+}
+
+// --- ФУНКЦИИ УПРАВЛЕНИЯ КЛИКАМИ ПО ФИЛЬТРАМ ---
+window.setCategory = function(cat) {
+    if (currentCategory === cat) {
+        currentCategory = null;
+    } else {
+        currentCategory = cat;
+    }
+    currentSubcategory = null;
+    currentFilters = {}; 
+    
+    renderDynamicSidebar();
+    applySmartFilters();
+};
+
+window.setSubcategory = function(sub) {
+    if (currentSubcategory === sub) {
+        currentSubcategory = null;
+    } else {
+        currentSubcategory = sub;
+    }
+    currentFilters = {}; 
+    
+    renderDynamicSidebar();
+    applySmartFilters();
+};
+
+window.toggleFilter = function(filterName, filterValue) {
+    if (!currentFilters[filterName]) currentFilters[filterName] = [];
+    
+    const idx = currentFilters[filterName].indexOf(filterValue);
+    if (idx > -1) {
+        currentFilters[filterName].splice(idx, 1);
+        if (currentFilters[filterName].length === 0) delete currentFilters[filterName];
+    } else {
+        currentFilters[filterName].push(filterValue);
+    }
+    
+    renderDynamicSidebar();
+    applySmartFilters();
+};
+
+function applySmartFilters() {
+    let result = allProducts;
+
+    if (currentCategory) result = result.filter(p => p.category === currentCategory);
+    if (currentSubcategory) result = result.filter(p => p.subcategory === currentSubcategory);
+    for (const [fName, fValues] of Object.entries(currentFilters)) {
+        result = result.filter(p => p.filters && fValues.includes(p.filters[fName]));
+    }
+
+    currentProducts = result; 
+    itemsToShow = 6; // Сбрасываем подгрузку
+    
+    const grid = document.getElementById('catalog-grid');
+    if (grid) applySortAndRender(grid);
+}
+
+
 // --- ЛОГИКА ИЗБРАННОГО ---
 function toggleWishlist(btn) {
     const id = btn.dataset.id;
@@ -104,10 +233,8 @@ function toggleWishlist(btn) {
         icon.classList.add('fa-solid', 'text-[#D4B88A]');
     }
 
-    // Сохраняем обновленный список в память браузера
     localStorage.setItem('hermes_wishlist', JSON.stringify(wishlist));
 
-    // Если мы прямо сейчас на странице Избранного — обновляем витрину
     if (document.getElementById('wishlist-grid')) {
         renderWishlist();
     }
@@ -120,7 +247,6 @@ function renderWishlist() {
 
     container.innerHTML = '';
     
-    // Оставляем только те товары, ID которых есть в нашем массиве wishlist
     const likedProducts = allProducts.filter(p => wishlist.includes(p.id));
 
     if (likedProducts.length === 0) {
@@ -151,7 +277,6 @@ function createCardHtml(product) {
 
     const hoverImageHtml = image1 ? `<img src="${image1}" alt="${product.name} detail" class="absolute inset-0 w-full h-full object-contain mix-blend-multiply opacity-0 transition-opacity duration-700 group-hover:opacity-100">` : '';
 
-    // Проверяем, есть ли этот товар в Избранном, чтобы закрасить сердечко
     const isLiked = wishlist.includes(product.id);
     const heartClass = isLiked ? 'fa-solid text-[#D4B88A]' : 'fa-regular text-gray-400 hover:text-[#D4B88A]';
 
@@ -203,150 +328,6 @@ function renderCatalog(products, container) {
     }
 }
 
-// --- ЛОГИКА ФИЛЬТРОВ (Категория -> Бренд -> Модель) ---
-function formatSubcategoryName(str) {
-    const mapping = {
-        "iphone-15-pro": "iPhone 15 Pro",
-        "charging-station": "Зарядные станции",
-        "smartphones": "Смартфоны"
-    };
-    return mapping[str] || str.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
-}
-
-function initCategoryFilters() {
-    const categoryLinks = document.querySelectorAll('.category-filter, .category-link');
-    const catalogGrid = document.getElementById('catalog-grid');
-    const brandContainer = document.getElementById('brand-container');
-    const brandList = document.getElementById('brand-list');
-    const subcategoryContainer = document.getElementById('subcategory-container');
-    const subcategoryList = document.getElementById('subcategory-list');
-
-    if (!catalogGrid) return; 
-
-    categoryLinks.forEach(link => {
-        link.addEventListener('click', (e) => {
-            const target = e.target.closest('a');
-            if (!target.dataset.category) return; 
-            
-            if (window.location.pathname.includes('catalog.html')) {
-                e.preventDefault();
-                
-                activeCategory = target.dataset.category;
-                activeBrand = 'all'; 
-                activeSubcategory = 'all'; 
-                
-                document.querySelectorAll('.category-filter').forEach(el => {
-                    el.classList.remove('text-[#1C1C1C]', 'font-medium');
-                    el.classList.add('text-gray-600', 'hover:text-[#1C1C1C]');
-                });
-                if (target.classList.contains('category-filter')) {
-                    target.classList.remove('text-gray-600', 'hover:text-[#1C1C1C]');
-                    target.classList.add('text-[#1C1C1C]', 'font-medium');
-                }
-
-                if (activeCategory === 'all') {
-                    if(brandContainer) brandContainer.classList.add('hidden');
-                    if(subcategoryContainer) subcategoryContainer.classList.add('hidden');
-                } else {
-                    const categoryProducts = allProducts.filter(p => p.category === activeCategory);
-                    renderBrands(categoryProducts, brandContainer, brandList, subcategoryContainer, subcategoryList, catalogGrid);
-                    if(subcategoryContainer) subcategoryContainer.classList.add('hidden');
-                }
-
-                applyAllFiltersAndRender(catalogGrid);
-            }
-        });
-    });
-}
-
-function renderBrands(products, container, list, subContainer, subList, grid) {
-    if (!container || !list) return;
-    const brands = [...new Set(products.map(p => p.brand).filter(Boolean))];
-
-    if (brands.length === 0) {
-        container.classList.add('hidden');
-        return;
-    }
-
-    container.classList.remove('hidden');
-    list.innerHTML = `<li><a href="#" class="text-[#1C1C1C] font-medium flex justify-between brand-filter" data-brand="all">Все бренды</a></li>`;
-
-    brands.forEach(brand => {
-        list.innerHTML += `<li><a href="#" class="text-gray-600 hover:text-[#1C1C1C] transition flex justify-between brand-filter" data-brand="${brand}">${brand}</a></li>`;
-    });
-
-    const brandLinks = list.querySelectorAll('.brand-filter');
-    brandLinks.forEach(link => {
-        link.addEventListener('click', (e) => {
-            e.preventDefault();
-            activeBrand = e.target.closest('a').dataset.brand;
-            activeSubcategory = 'all'; 
-
-            brandLinks.forEach(el => {
-                el.classList.remove('text-[#1C1C1C]', 'font-medium');
-                el.classList.add('text-gray-600', 'hover:text-[#1C1C1C]');
-            });
-            e.target.closest('a').classList.remove('text-gray-600', 'hover:text-[#1C1C1C]');
-            e.target.closest('a').classList.add('text-[#1C1C1C]', 'font-medium');
-
-            if (activeBrand === 'all') {
-                if(subContainer) subContainer.classList.add('hidden');
-            } else {
-                const brandProducts = allProducts.filter(p => p.category === activeCategory && p.brand === activeBrand);
-                renderSubcategories(brandProducts, subContainer, subList, grid);
-            }
-
-            applyAllFiltersAndRender(grid);
-        });
-    });
-}
-
-function renderSubcategories(products, container, list, grid) {
-    if (!container || !list) return;
-    const subcategories = [...new Set(products.map(p => p.subcategory).filter(Boolean))];
-
-    if (subcategories.length === 0) {
-        container.classList.add('hidden');
-        return;
-    }
-
-    container.classList.remove('hidden');
-    list.innerHTML = `<li><a href="#" class="text-[#1C1C1C] font-medium flex justify-between subcategory-filter" data-subcategory="all">Все модели</a></li>`;
-
-    subcategories.forEach(sub => {
-        const formattedName = formatSubcategoryName(sub);
-        list.innerHTML += `<li><a href="#" class="text-gray-600 hover:text-[#1C1C1C] transition flex justify-between subcategory-filter" data-subcategory="${sub}">${formattedName}</a></li>`;
-    });
-
-    const subLinks = list.querySelectorAll('.subcategory-filter');
-    subLinks.forEach(link => {
-        link.addEventListener('click', (e) => {
-            e.preventDefault();
-            activeSubcategory = e.target.closest('a').dataset.subcategory;
-
-            subLinks.forEach(el => {
-                el.classList.remove('text-[#1C1C1C]', 'font-medium');
-                el.classList.add('text-gray-600', 'hover:text-[#1C1C1C]');
-            });
-            e.target.closest('a').classList.remove('text-gray-600', 'hover:text-[#1C1C1C]');
-            e.target.closest('a').classList.add('text-[#1C1C1C]', 'font-medium');
-
-            applyAllFiltersAndRender(grid);
-        });
-    });
-}
-
-function applyAllFiltersAndRender(grid) {
-    let filtered = [...allProducts];
-    if (activeCategory !== 'all') filtered = filtered.filter(p => p.category === activeCategory);
-    if (activeBrand !== 'all') filtered = filtered.filter(p => p.brand === activeBrand);
-    if (activeSubcategory !== 'all') filtered = filtered.filter(p => p.subcategory === activeSubcategory);
-
-    currentProducts = filtered;
-    itemsToShow = 6;
-    applySortAndRender(grid);
-}
-
 function applySortAndRender(grid) {
     const sortSelect = document.getElementById('sort-select');
     let productsToSort = [...currentProducts];
@@ -387,6 +368,7 @@ function initSort() {
 }
 
 function parsePrice(priceString) {
+    if (!priceString) return 0;
     return parseInt(priceString.replace(/\D/g, ''), 10);
 }
 
@@ -417,12 +399,12 @@ function renderProductPage(products) {
     }
 
     document.title = `${product.name} — Hermes Store`;
-    document.getElementById('breadcrumb-brand').textContent = product.brand;
+    document.getElementById('breadcrumb-brand').textContent = product.brand || product.category;
     document.getElementById('breadcrumb-name').textContent = product.name;
-    document.getElementById('product-brand').textContent = product.brand;
+    document.getElementById('product-brand').textContent = product.brand || product.category;
     document.getElementById('product-name').textContent = product.name;
     document.getElementById('product-price').textContent = product.price;
-    document.getElementById('product-description').textContent = product.description;
+    document.getElementById('product-description').textContent = product.description || '';
     
     const avitoBtn = document.getElementById('avito-btn');
     if (avitoBtn) avitoBtn.href = product.avitoLink;
@@ -503,7 +485,6 @@ function initSearch() {
 
     if (!searchModal || !searchInput) return;
 
-    // ИСПРАВЛЕНИЕ: Теперь клик слушает саму иконку, а не весь родительский блок
     searchIcons.forEach(icon => {
         icon.addEventListener('click', (e) => {
             e.preventDefault();
@@ -530,7 +511,7 @@ function initSearch() {
 
         const filtered = allProducts.filter(product => 
             product.name.toLowerCase().includes(query) || 
-            product.brand.toLowerCase().includes(query) ||
+            (product.brand && product.brand.toLowerCase().includes(query)) ||
             (product.category && product.category.toLowerCase().includes(query)) ||
             (product.subcategory && product.subcategory.toLowerCase().includes(query))
         );
@@ -557,26 +538,21 @@ function initSearch() {
         });
     });
 }
-// Обработка клика по категориям в шапке (с защитой от бесконечного цикла)
+
+// Обработка клика по категориям в шапке
 document.addEventListener('click', (e) => {
-    // Используем closest, чтобы точно поймать клик, даже если нажали на текст внутри ссылки
     const link = e.target.closest('.category-link');
     
     if (link) {
-        // ЗАЩИТА №1: Если это программный клик от нашего скрипта — игнорируем и рвем цикл!
         if (!e.isTrusted) return;
-
-        // ЗАЩИТА №2: Если клиент уже в каталоге и кликает по левому сайдбару (<aside>), 
-        // страницу не перезагружаем (пусть работают локальные фильтры)
-        if (link.closest('aside')) return;
+        if (link.closest('aside')) return; // Игнорируем сайдбар, там уже все само строится
 
         e.preventDefault(); 
         const category = link.getAttribute('data-category');
-        
-        // Перенаправляем пользователя
         window.location.href = `catalog.html?category=${category}`;
     }
 });
+
 // Автоматическое применение фильтра из URL при открытии каталога
 window.addEventListener('DOMContentLoaded', () => {
     if (document.getElementById('catalog-grid')) {
@@ -584,28 +560,24 @@ window.addEventListener('DOMContentLoaded', () => {
         const categoryFromUrl = urlParams.get('category');
         
         if (categoryFromUrl) {
-            // Запускаем таймер, который проверяет каждые 100мс, загрузилась ли база
             const waitForData = setInterval(() => {
-                const targetBtn = document.querySelector(`aside a[data-category="${categoryFromUrl}"]`);
-                const grid = document.getElementById('catalog-grid');
-                
-                // Если кнопка найдена и в сетке уже появились первые товары — база загружена!
-                if (targetBtn && grid && grid.children.length > 0) {
-                    clearInterval(waitForData); // Останавливаем таймер
-                    targetBtn.click(); // Теперь безопасно кликаем
+                // Ждем, пока товары загрузятся в массив
+                if (allProducts.length > 0) {
+                    clearInterval(waitForData);
+                    // Вызываем новую умную функцию, которая сразу применит категорию!
+                    setCategory(categoryFromUrl); 
                 }
             }, 100);
         }
     }
 });
+
 // Логика плавного скрытия прелоадера
 window.addEventListener('load', () => {
     const preloader = document.getElementById('preloader');
     if (preloader) {
-        // Даем пользователю полсекунды насладиться логотипом, затем плавно скрываем
         setTimeout(() => {
             preloader.style.opacity = '0';
-            // Ждем завершения CSS-анимации (700мс) и полностью удаляем элемент из HTML
             setTimeout(() => {
                 preloader.remove();
             }, 700);
