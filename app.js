@@ -99,8 +99,8 @@ function renderDynamicSidebar() {
     // 1. Генерируем ГЛАВНЫЕ КАТЕГОРИИ
     const categories = [...new Set(allProducts.map(p => p.category))].filter(Boolean);
     
+    // Заголовок "КАТАЛОГ" убран отсюда, оставляем только контейнер для кнопок
     html += `<div class="mb-8">
-                <h3 class="text-xl mb-4 font-light tracking-wider" style="font-family: 'Playfair Display', serif;">КАТЕГОРИИ</h3>
                 <div class="flex flex-col gap-3">`;
     categories.forEach(cat => {
         const isActive = cat === currentCategory ? 'font-bold text-[#1C1C1C]' : 'text-gray-500';
@@ -109,6 +109,7 @@ function renderDynamicSidebar() {
     html += `</div></div>`;
 
     // 2. Генерируем ПОДКАТЕГОРИИ (Только если выбрана главная категория)
+    // ... дальше твой старый код без изменений ...
     if (currentCategory) {
         const subcategories = [...new Set(allProducts.filter(p => p.category === currentCategory).map(p => p.subcategory))].filter(Boolean);
         if (subcategories.length > 0) {
