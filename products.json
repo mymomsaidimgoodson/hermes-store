@@ -80,14 +80,18 @@
     },
     {
         "id": 5,
-        "name": "Роутер Xiaomi BE3600 CN",
-        "price": 4000,
-        "category": "Гаджеты",
-        "subcategory": "Роутер",
+        "name": "Блок питания Remax CA05 45W",
+        "price": 1990,
+        "category": "Зарядные устройства",
+        "subcategory": "Блок питания",
         "images": [
-            "assets/images/гаджеты/og-image.png"
+            "assets/images/зарядные-устройства/remaxca0545w.webp"
         ],
-        "filters": {},
-        "specs": {}
+        "filters": {
+            "Мощность": "45W"
+        },
+        "specs": {
+            "Мощность": "45W"
+        }
     }
 ]

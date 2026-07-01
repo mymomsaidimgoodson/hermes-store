@@ -389,8 +389,8 @@ function renderBestsellers(products, container) {
 function renderProductPage(products) {
     const urlParams = new URLSearchParams(window.location.search);
     const productId = urlParams.get('id');
-    const product = products.find(p => p.id === productId);
-
+    const product = products.find(p => String(p.id) === String(productId));
+    
     const container = document.getElementById('product-container');
     const errorMessage = document.getElementById('error-message');
 
