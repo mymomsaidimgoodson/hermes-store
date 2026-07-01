@@ -1,68 +1,5 @@
 [
     {
-        "id": 1,
-        "category": "Чехлы",
-        "subcategory": "iPhone 15 Pro",
-        "brand": "Hermes Concept",
-        "name": "Кожаный чехол для iPhone 15 Pro",
-        "price": 4990,
-        "description": "Премиальная эко-кожа. Идеальное прилегание и защита от падений. Поддержка MagSafe.",
-        "images": [
-            "https://picsum.photos/id/445/1000/1000",
-            "https://picsum.photos/id/445/500/500"
-        ],
-        "specs": {
-            "Материал": "Эко-кожа",
-            "Совместимость": "iPhone 15 Pro",
-            "Особенности": "Поддержка MagSafe"
-        },
-        "avitoLink": "https://avito.ru",
-        "isNew": true,
-        "isBestseller": true
-    },
-    {
-        "id": 2,
-        "category": "Cтекла",
-        "subcategory": "iPhone 15 Pro",
-        "brand": "Shield",
-        "name": "Защитное стекло Privacy",
-        "price": 1990,
-        "description": "Закаленное стекло с приватным фильтром (Антишпион). Надежно защищает экран от царапин и любопытных глаз.",
-        "images": [
-            "https://picsum.photos/id/60/1000/1000",
-            "https://picsum.photos/id/60/500/500"
-        ],
-        "specs": {
-            "Тип": "Антишпион",
-            "Твердость": "9H",
-            "Покрытие": "Олеофобное"
-        },
-        "avitoLink": "https://avito.ru",
-        "isNew": false,
-        "isBestseller": true
-    },
-    {
-        "id": 3,
-        "category": "Гаджеты",
-        "subcategory": "Беспроводные зарядки",
-        "brand": "Volt",
-        "name": "Магнитная зарядная станция 3 в 1",
-        "price": 5990,
-        "description": "Минималистичная док-станция из авиационного алюминия для одновременной зарядки iPhone, Apple Watch и AirPods.",
-        "images": [
-            "https://picsum.photos/id/2/1000/1000",
-            "https://picsum.photos/id/3/500/500"
-        ],
-        "specs": {
-            "Мощность": "15 Вт",
-            "Разъем": "USB-C",
-            "Материал": "Алюминий"
-        },
-        "avitoLink": "https://avito.ru",
-        "isNew": false,
-        "isBestseller": true
-    },
-    {
         "id": 4,
         "name": "Роутер Xiaomi AX3000T",
         "price": 3190,
@@ -76,7 +13,8 @@
         },
         "specs": {
             "Бренд": "Xiaomi"
-        }
+        },
+        "avitoLink": "https://www.avito.ru/orel/tovary_dlya_kompyutera/router_xiaomi_ax3000t_qualcomm_8135416220"
     },
     {
         "id": 5,
@@ -93,5 +31,31 @@
         "specs": {
             "Мощность": "45W"
         }
+    },
+    {
+        "id": 6,
+        "name": "Защитное стекло Remax для iPhone 15 Pro",
+        "price": 800,
+        "category": "Защитные стекла",
+        "subcategory": "iPhone 15",
+        "images": [
+            "assets/images/защитные-стекла/remaxglass.webp"
+        ],
+        "filters": {},
+        "specs": {},
+        "avitoLink": ""
+    },
+    {
+        "id": 7,
+        "name": "Чехол Silicone Case для iPhone 15",
+        "price": 1490,
+        "category": "Чехлы",
+        "subcategory": "iPhone 15",
+        "images": [
+            "assets/images/чехлы/iphone15scblack.webp"
+        ],
+        "filters": {},
+        "specs": {},
+        "avitoLink": ""
     }
 ]

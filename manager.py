@@ -12,7 +12,7 @@ class HermesAdminApp:
     def __init__(self, root):
         self.root = root
         self.root.title("Hermes Store - CMS (Система управления)")
-        self.root.geometry("1100x650") 
+        self.root.geometry("1100x700") # Слегка увеличили высоту окна для нового поля
         self.root.configure(padx=15, pady=15)
 
         self.selected_image_path = None
@@ -50,8 +50,13 @@ class HermesAdminApp:
         self.subcategory_entry = ttk.Entry(left_frame, width=50)
         self.subcategory_entry.pack(fill="x", pady=(0, 10))
 
+        # НОВОЕ ПОЛЕ: Ссылка на Авито
+        ttk.Label(left_frame, text="Ссылка на Авито:").pack(anchor="w")
+        self.avito_entry = ttk.Entry(left_frame, width=50)
+        self.avito_entry.pack(fill="x", pady=(0, 10))
+
         ttk.Label(left_frame, text="Характеристики (Формат -> Разъем: Type-C):").pack(anchor="w")
-        self.specs_text = tk.Text(left_frame, height=6, width=50, font=("Arial", 10))
+        self.specs_text = tk.Text(left_frame, height=5, width=50, font=("Arial", 10))
         self.specs_text.pack(fill="x", pady=(0, 15))
 
         self.img_btn = ttk.Button(left_frame, text="Выбрать новое фото...", command=self.choose_image)
@@ -78,10 +83,9 @@ class HermesAdminApp:
 
         ttk.Label(right_header, text="📦 База товаров", font=("Arial", 14, "bold")).pack(side="left")
 
-        # Новое: Блок умного поиска
         self.search_entry = ttk.Entry(right_header, width=30)
         self.search_entry.pack(side="right")
-        self.search_entry.bind("<KeyRelease>", self.on_search) # Реагирует на каждое нажатие клавиши
+        self.search_entry.bind("<KeyRelease>", self.on_search) 
         ttk.Label(right_header, text="🔍 Поиск:").pack(side="right", padx=(0, 5))
 
         # Настраиваем таблицу
@@ -102,11 +106,9 @@ class HermesAdminApp:
         scrollbar.pack(side="right", fill="y")
         self.tree.pack(side="left", fill="both", expand=True)
 
-        # Слушаем клики по таблице
         self.tree.bind("<<TreeviewSelect>>", self.on_item_select)
 
     def on_search(self, event):
-        # При вводе текста просто обновляем таблицу (она сама отфильтрует данные)
         self.update_tree()
 
     def load_products(self):
@@ -120,16 +122,12 @@ class HermesAdminApp:
         self.update_tree()
 
     def update_tree(self):
-        # Очищаем таблицу
         for item in self.tree.get_children():
             self.tree.delete(item)
             
-        # Получаем текст из поиска и переводим в нижний регистр для точного сравнения
         query = self.search_entry.get().lower().strip()
 
-        # Заполняем заново с учетом фильтра
         for p in self.products_data:
-            # Ищем совпадения в названии, категории или ID
             name_match = query in p.get("name", "").lower()
             cat_match = query in p.get("category", "").lower()
             id_match = query == str(p.get("id"))
@@ -154,12 +152,11 @@ class HermesAdminApp:
         item_values = self.tree.item(selected[0], "values")
         product_id = int(item_values[0])
         
-        # Ищем товар в нашей оперативной базе (умное сравнение)
+        # Умное сравнение
         product = next((p for p in self.products_data if str(p.get("id")) == str(product_id)), None)
         if not product:
             return
 
-        # Переводим форму в режим редактирования
         self.editing_id = product_id
         self.form_title.config(text=f"✏️ Редактирование товара ID: {product_id}", foreground="blue")
         
@@ -175,6 +172,10 @@ class HermesAdminApp:
         
         self.subcategory_entry.delete(0, tk.END)
         self.subcategory_entry.insert(0, product.get("subcategory", ""))
+
+        # Подтягиваем ссылку на Авито
+        self.avito_entry.delete(0, tk.END)
+        self.avito_entry.insert(0, product.get("avitoLink", ""))
         
         self.specs_text.delete("1.0", tk.END)
         specs = product.get("filters", {})
@@ -186,18 +187,17 @@ class HermesAdminApp:
         self.img_label.config(text=f"Текущее фото: {os.path.basename(current_image)} (оставьте, чтобы не менять)", foreground="gray")
 
     def reset_form(self):
-        # Возвращаем форму в режим создания
         self.editing_id = None
         self.form_title.config(text="✨ Добавление нового товара", foreground="black")
         self.name_entry.delete(0, tk.END)
         self.price_entry.delete(0, tk.END)
         self.category_entry.delete(0, tk.END)
         self.subcategory_entry.delete(0, tk.END)
+        self.avito_entry.delete(0, tk.END) # Очищаем Авито
         self.specs_text.delete("1.0", tk.END)
         self.selected_image_path = None
         self.img_label.config(text="Файл не выбран", foreground="gray")
         
-        # Снимаем выделение в дереве
         for item in self.tree.selection():
             self.tree.selection_remove(item)
 
@@ -218,6 +218,7 @@ class HermesAdminApp:
         price_str = self.price_entry.get().strip()
         category = self.category_entry.get().strip()
         subcategory = self.subcategory_entry.get().strip()
+        avito_url = self.avito_entry.get().strip() # Читаем ссылку
         specs_raw = self.specs_text.get("1.0", tk.END).strip()
 
         if not name or not price_str or not category:
@@ -234,7 +235,6 @@ class HermesAdminApp:
             messagebox.showerror("Ошибка", "Для нового товара обязательно выберите фото!")
             return
 
-        # Парсим характеристики
         filters_dict = {}
         if specs_raw:
             for line in specs_raw.split('\n'):
@@ -242,20 +242,23 @@ class HermesAdminApp:
                     key, val = line.split(':', 1)
                     filters_dict[key.strip()] = val.strip()
 
-        # Создаем папку (если ее нет)
         safe_category_folder = category.replace(" ", "-").lower()
         target_dir = os.path.join(IMAGES_DIR, safe_category_folder)
         os.makedirs(target_dir, exist_ok=True)
 
         json_image_path = None
         
-        # Если было выбрано новое фото — копируем его
         if self.selected_image_path:
             filename = os.path.basename(self.selected_image_path)
             safe_filename = filename.replace(" ", "-").lower()
             destination_path = os.path.join(target_dir, safe_filename)
             try:
-                shutil.copy2(self.selected_image_path, destination_path)
+                # Если пути не совпадают, копируем
+                if os.path.abspath(self.selected_image_path) != os.path.abspath(destination_path):
+                    shutil.copy2(self.selected_image_path, destination_path)
+                json_image_path = f"{IMAGES_DIR}/{safe_category_folder}/{safe_filename}"
+            except shutil.SameFileError:
+                # Если файл уже лежит в нужной папке проекта, просто запоминаем путь
                 json_image_path = f"{IMAGES_DIR}/{safe_category_folder}/{safe_filename}"
             except Exception as e:
                 messagebox.showerror("Ошибка", f"Не удалось скопировать файл: {e}")
@@ -269,9 +272,9 @@ class HermesAdminApp:
                 product["price"] = price
                 product["category"] = category
                 product["subcategory"] = subcategory
+                product["avitoLink"] = avito_url # Сохраняем ссылку в базу
                 product["filters"] = filters_dict
                 product["specs"] = filters_dict
-                # Обновляем фото, только если пользователь загрузил новое
                 if json_image_path:
                     product["images"] = [json_image_path]
             msg = f"Товар '{name}' успешно обновлен!"
@@ -294,7 +297,8 @@ class HermesAdminApp:
                 "price": price,
                 "category": category,
                 "subcategory": subcategory,
-                "images": [json_image_path],
+                "avitoLink": avito_url, # Сохраняем ссылку в базу
+                "images": [json_image_path] if json_image_path else [],
                 "filters": filters_dict,
                 "specs": filters_dict
             }
