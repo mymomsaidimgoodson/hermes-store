@@ -296,7 +296,7 @@ function createCardHtml(product) {
             </a>
             <div class="mt-auto">
                 <p class="text-gray-400 text-[13px] mt-2 mb-2 font-light">${shortSpec}</p>
-                <p class="text-[#1C1C1C]">${product.price}</p>
+                <p class="text-[#1C1C1C]">${product.price.toLocaleString('ru-RU')} ₽</p>
             </div>
         </div>
     `;
@@ -404,7 +404,7 @@ function renderProductPage(products) {
     document.getElementById('breadcrumb-name').textContent = product.name;
     document.getElementById('product-brand').textContent = product.brand || product.category;
     document.getElementById('product-name').textContent = product.name;
-    document.getElementById('product-price').textContent = product.price;
+    document.getElementById('product-price').textContent = product.price.toLocaleString('ru-RU') + ' ₽';
     document.getElementById('product-description').textContent = product.description || '';
     
     const avitoBtn = document.getElementById('avito-btn');
