@@ -1,86 +1,114 @@
 [
-  {
-    "id": "leather-case-iphone-15-pro",
-    "category": "Чехлы",
-    "subcategory": "iPhone 15 Pro",
-    "brand": "Hermes Concept",
-    "name": "Кожаный чехол для iPhone 15 Pro",
-    "price": "4 990 ₽",
-    "description": "Премиальная эко-кожа. Идеальное прилегание и защита от падений. Поддержка MagSafe.",
-    "images": [
-      "https://picsum.photos/id/445/1000/1000",
-      "https://picsum.photos/id/445/500/500"
-    ],
-    "specs": {
-      "Материал": "Эко-кожа",
-      "Совместимость": "iPhone 15 Pro",
-      "Особенности": "Поддержка MagSafe"
+    {
+        "id": "leather-case-iphone-15-pro",
+        "category": "Чехлы",
+        "subcategory": "iPhone 15 Pro",
+        "brand": "Hermes Concept",
+        "name": "Кожаный чехол для iPhone 15 Pro",
+        "price": "4 990 ₽",
+        "description": "Премиальная эко-кожа. Идеальное прилегание и защита от падений. Поддержка MagSafe.",
+        "images": [
+            "https://picsum.photos/id/445/1000/1000",
+            "https://picsum.photos/id/445/500/500"
+        ],
+        "specs": {
+            "Материал": "Эко-кожа",
+            "Совместимость": "iPhone 15 Pro",
+            "Особенности": "Поддержка MagSafe"
+        },
+        "avitoLink": "https://avito.ru",
+        "isNew": true,
+        "isBestseller": true
     },
-    "avitoLink": "https://avito.ru",
-    "isNew": true,
-    "isBestseller": true
-  },
-  {
-    "id": "glass-privacy-iphone-15-pro",
-    "category": "Cтекла",
-    "subcategory": "iPhone 15 Pro",
-    "brand": "Shield",
-    "name": "Защитное стекло Privacy",
-    "price": "1 490 ₽",
-    "description": "Закаленное стекло с приватным фильтром (Антишпион). Надежно защищает экран от царапин и любопытных глаз.",
-    "images": [
-      "https://picsum.photos/id/60/1000/1000",
-      "https://picsum.photos/id/60/500/500"
-    ],
-    "specs": {
-      "Тип": "Антишпион",
-      "Твердость": "9H",
-      "Покрытие": "Олеофобное"
+    {
+        "id": "glass-privacy-iphone-15-pro",
+        "category": "Cтекла",
+        "subcategory": "iPhone 15 Pro",
+        "brand": "Shield",
+        "name": "Защитное стекло Privacy",
+        "price": "1 490 ₽",
+        "description": "Закаленное стекло с приватным фильтром (Антишпион). Надежно защищает экран от царапин и любопытных глаз.",
+        "images": [
+            "https://picsum.photos/id/60/1000/1000",
+            "https://picsum.photos/id/60/500/500"
+        ],
+        "specs": {
+            "Тип": "Антишпион",
+            "Твердость": "9H",
+            "Покрытие": "Олеофобное"
+        },
+        "avitoLink": "https://avito.ru",
+        "isNew": false,
+        "isBestseller": true
     },
-    "avitoLink": "https://avito.ru",
-    "isNew": false,
-    "isBestseller": true
-  },
-  {
-    "id": "wireless-charger-stand",
-    "category": "Гаджеты",
-    "subcategory": "Беспроводные зарядки",
-    "brand": "Volt",
-    "name": "Магнитная зарядная станция 3 в 1",
-    "price": "5 990 ₽",
-    "description": "Минималистичная док-станция из авиационного алюминия для одновременной зарядки iPhone, Apple Watch и AirPods.",
-    "images": [
-      "https://picsum.photos/id/2/1000/1000",
-      "https://picsum.photos/id/3/500/500"
-    ],
-    "specs": {
-      "Мощность": "15 Вт",
-      "Разъем": "USB-C",
-      "Материал": "Алюминий"
+    {
+        "id": "wireless-charger-stand",
+        "category": "Гаджеты",
+        "subcategory": "Беспроводные зарядки",
+        "brand": "Volt",
+        "name": "Магнитная зарядная станция 3 в 1",
+        "price": "5 990 ₽",
+        "description": "Минималистичная док-станция из авиационного алюминия для одновременной зарядки iPhone, Apple Watch и AirPods.",
+        "images": [
+            "https://picsum.photos/id/2/1000/1000",
+            "https://picsum.photos/id/3/500/500"
+        ],
+        "specs": {
+            "Мощность": "15 Вт",
+            "Разъем": "USB-C",
+            "Материал": "Алюминий"
+        },
+        "avitoLink": "https://avito.ru",
+        "isNew": false,
+        "isBestseller": true
     },
-    "avitoLink": "https://avito.ru",
-    "isNew": false,
-    "isBestseller": true
-  },
-  {
-    "id": "xiaomi-14t-pro",
-    "category": "Техника",
-    "subcategory": "Смартфоны",
-    "brand": "Xiaomi",
-    "name": "Xiaomi 14T Pro",
-    "price": "54 990 ₽",
-    "description": "Новый уровень мобильной фотографии вместе с Leica. Ультрабыстрая зарядка и флагманский дисплей в премиальном дизайн.",
-    "images": [
-      "https://picsum.photos/id/201/1000/1000",
-      "https://picsum.photos/id/202/500/500"
-    ],
-    "specs": {
-      "Память": "12/512GB",
-      "Процессор": "MediaTek 9300+",
-      "Экран": "AMOLED 144Hz"
+    {
+        "id": "xiaomi-14t-pro",
+        "category": "Техника",
+        "subcategory": "Смартфоны",
+        "brand": "Xiaomi",
+        "name": "Xiaomi 14T Pro",
+        "price": "54 990 ₽",
+        "description": "Новый уровень мобильной фотографии вместе с Leica. Ультрабыстрая зарядка и флагманский дисплей в премиальном дизайн.",
+        "images": [
+            "https://picsum.photos/id/201/1000/1000",
+            "https://picsum.photos/id/202/500/500"
+        ],
+        "specs": {
+            "Память": "12/512GB",
+            "Процессор": "MediaTek 9300+",
+            "Экран": "AMOLED 144Hz"
+        },
+        "avitoLink": "https://avito.ru",
+        "isNew": false,
+        "isBestseller": true
     },
-    "avitoLink": "https://avito.ru",
-    "isNew": false,
-    "isBestseller": true
-  }
+    {
+        "id": 1,
+        "name": "Роутер Xiaomi AX3000T",
+        "price": 3190,
+        "category": "Гаджеты",
+        "subcategory": "AX3000T",
+        "images": [
+            "assets/images/гаджеты/og-image.png"
+        ],
+        "filters": {
+            "Бренд": "Xiaomi"
+        },
+        "specs": {
+            "Бренд": "Xiaomi"
+        }
+    },
+    {
+        "id": 2,
+        "name": "Роутер Xiaomi BE3600 CN",
+        "price": 4000,
+        "category": "Гаджеты",
+        "subcategory": "BE 3600",
+        "images": [
+            "assets/images/гаджеты/og-image.png"
+        ],
+        "filters": {},
+        "specs": {}
+    }
 ]
